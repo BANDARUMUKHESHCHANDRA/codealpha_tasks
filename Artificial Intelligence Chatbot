@@ -1,0 +1,50 @@
+import java.util.*;
+
+public class EduBotConsole {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Map<List<String>, String> knowledgeBase = new LinkedHashMap<>();
+
+        System.out.println("=======================================");
+        System.out.println("  EduBot - Java Console ChatBot");
+        System.out.println("=======================================");
+        System.out.println("Type 'exit' or 'bye' to end the chat.\n");
+
+        knowledgeBase.put(Arrays.asList("hello", "hi", "hey"), "Hello! How can I help you?");
+        knowledgeBase.put(Arrays.asList("your name", "who are you", "what is your name"), "I'm EduBot, your smart assistant.");
+        knowledgeBase.put(Arrays.asList("java", "programming", "code"), "Java is a robust, object-oriented programming language.");
+        knowledgeBase.put(Arrays.asList("help", "support", "assist"), "Sure! I can help with Java or general tech questions.");
+        knowledgeBase.put(Arrays.asList("grade", "marks", "score"), "Use a grade tracker to manage and analyze scores.");
+        knowledgeBase.put(Arrays.asList("chatbot", "ai", "robot"), "Yes! I'm a simple chatbot built using Java.");
+        knowledgeBase.put(Arrays.asList("time", "clock"), "I can't tell the time yet, but I'm always running!");
+
+        while (true) {
+            System.out.print("\nYou: ");
+            String input = sc.nextLine().toLowerCase();
+
+            if (input.contains("exit") || input.contains("bye")) {
+                System.out.println("EduBot: Goodbye! Have a great day!");
+                break;
+            }
+
+            boolean found = false;
+
+            for (Map.Entry<List<String>, String> entry : knowledgeBase.entrySet()) {
+                for (String keyword : entry.getKey()) {
+                    if (input.contains(keyword)) {
+                        System.out.println("EduBot: " + entry.getValue());
+                        found = true;
+                        break;
+                    }
+                }
+                if (found) break;
+            }
+
+            if (!found) {
+                System.out.println("EduBot: I didn't get that. Could you try rephrasing?");
+            }
+        }
+
+        sc.close();
+    }
+}
